@@ -21,13 +21,19 @@ fun main() {
 
 fun solvePart2Version2(input: List<String>): Int {
     val numbersAndDigits = numberMap + (1..9).toList().associateBy { it.toString() }
-    return input.map { line ->
-        val (_, firstValue)= numbersAndDigits.map { (key, value) -> line.indexOf(key) to value }.filter { it.first != -1 }
+    return input.sumOf { line ->
+        val (_, firstValue) = numbersAndDigits
+            .map { (key, value) -> line.indexOf(key) to value }
+            .filter { it.first != -1 }
             .minByOrNull { (index, _) -> index }!!
-        val (_, lastValue) = numbersAndDigits.map { (key, value) -> line.lastIndexOf(key) to value }.filter { it.first != -1 }
+
+        val (_, lastValue) = numbersAndDigits
+            .map { (key, value) -> line.lastIndexOf(key) to value }
+            .filter { it.first != -1 }
             .maxByOrNull { (index, _) -> index }!!
+
         firstValue * 10 + lastValue
-    }.sum()
+    }
 }
 
 val numberMap = mapOf(

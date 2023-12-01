@@ -9,4 +9,4 @@ fun main() {
 }
 
 fun solve(input: List<String>) =
-    input.map { line -> line.mapNotNull { it.digitToIntOrNull() } }.sumOf { (it.first().toString() + it.last()).toInt() }
+    input.map { line -> line.mapNotNull { it.digitToIntOrNull() } }.sumOf { it.first() * 10 + it.last() }
