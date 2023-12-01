@@ -24,12 +24,12 @@ fun solvePart2Version2(input: List<String>): Int {
     return input.sumOf { line ->
         val (_, firstValue) = numbersAndDigits
             .map { (key, value) -> line.indexOf(key) to value }
-            .filter { it.first != -1 }
+            .filter { (index, _) -> index != -1 }
             .minByOrNull { (index, _) -> index }!!
 
         val (_, lastValue) = numbersAndDigits
             .map { (key, value) -> line.lastIndexOf(key) to value }
-            .filter { it.first != -1 }
+            .filter { (index, _) -> index != -1 }
             .maxByOrNull { (index, _) -> index }!!
 
         firstValue * 10 + lastValue
