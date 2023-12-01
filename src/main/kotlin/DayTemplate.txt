@@ -1,0 +1,13 @@
+package day
+
+import readResourceLines
+
+fun main() {
+    val input = readResourceLines("Day.txt")
+    val solution = solve(input)
+    println(solution)
+}
+
+fun solve(input: List<String>): Int {
+    
+}
