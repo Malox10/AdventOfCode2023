@@ -1,5 +1,7 @@
 plugins {
     kotlin("jvm") version "1.8.0"
+    id("org.jetbrains.kotlinx.benchmark") version "0.4.4"
+//    id("org.jetbrains.kotlin.plugin.allopen")
 }
 
 group = "com.github.malox10"
@@ -9,8 +11,14 @@ repositories {
     mavenCentral()
 }
 
+//allOpen {
+//    annotation("org.openjdk.jmh.annotations.State")
+//}
+
+
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("org.jetbrains.kotlinx:kotlinx-benchmark-runtime:0.4.6")
 }
 
 tasks.test {
@@ -19,4 +27,10 @@ tasks.test {
 
 kotlin {
     jvmToolchain(17)
+}
+
+benchmark {
+    targets {
+        register("main")
+    }
 }
