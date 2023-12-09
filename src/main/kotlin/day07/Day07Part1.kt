@@ -24,9 +24,6 @@ fun parse(input: List<String>): List<Round> {
 
 
         val labels = handString.map { char -> labelMap[char]!! }
-        if(labels == listOf(Label.Two, Label.Two, Label.Seven, Label.Six, Label.Eight)) {
-            println(labels)
-        }
         val duplicates = labels
             .asSequence()
             .distinct()
