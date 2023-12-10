@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode")
+
 package day09
 
 import readResourceLines
