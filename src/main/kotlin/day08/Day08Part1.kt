@@ -52,8 +52,8 @@ enum class Direction(val label: Char) {
     Right('R')
 }
 
-class LoopedList<T>(private val inner: List<T>) {
-    private var index = 0
+data class LoopedList<T>(private val inner: List<T>) {
+    var index = 0; private set
 
     fun next(): T {
         val element = inner[index]

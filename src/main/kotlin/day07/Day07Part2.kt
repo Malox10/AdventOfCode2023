@@ -26,15 +26,12 @@ fun parsePart2(input: List<String>): List<RoundP2> {
         val (handString, betString) = line.split(" ").map { it.trim() }
         val bet = betString.toLong()
 
-
         val labels = handString.map { char -> labelMap[char]!! }
         val type = if(labels.contains(LabelP2.Jack)) {
-            val label = nonJacks.map { nonJack ->
-                val newLabel = labels.map { label -> if (label == LabelP2.Jack) nonJack else label }
-                getType(newLabel)
+            nonJacks.map { nonJack ->
+                val newLabels = labels.map { label -> if (label == LabelP2.Jack) nonJack else label }
+                getType(newLabels)
             }.minOf { it }
-
-            label
         } else {
             getType(labels)
         }
