@@ -9,8 +9,8 @@ fun main() {
     println(solution)
 }
 
-fun solve(input: List<String>): Long {
-    val stars = parse(input)
+fun solve(input: List<String>, expansion: Long = 1): Long {
+    val stars = parse(input, expansion)
     var sum = 0L
     stars.indices.forEach { firstStarIndex ->
         (firstStarIndex + 1 until stars.size).forEach { secondStarIndex ->
@@ -24,10 +24,10 @@ fun solve(input: List<String>): Long {
 }
 
 const val star = '#'
-fun parse(input: List<String>): List<Pair<Long, Long>> {
+fun parse(input: List<String>, expansion: Long): List<Pair<Long, Long>> {
     var rowOffsetCounter = 0L
     val rowOffsets = input.map { line ->
-        if(!line.contains(star)) rowOffsetCounter++
+        if(!line.contains(star)) rowOffsetCounter += expansion
         rowOffsetCounter
     }
 
@@ -43,7 +43,7 @@ fun parse(input: List<String>): List<Pair<Long, Long>> {
                 foundStar = true
             }
         }
-        if(!foundStar) columnOffset++
+        if(!foundStar) columnOffset += expansion
     }
 
     return stars
