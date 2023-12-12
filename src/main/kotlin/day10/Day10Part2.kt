@@ -7,7 +7,8 @@ import kotlin.math.sign
 
 fun main() {
     val input = readResourceLines("Day10.txt")
-    repeat(300) {
+    repeat(1000) {
+
         val solution = solvePart2(input)
         println(solution)
     }
@@ -51,9 +52,11 @@ fun solvePart2(input: List<String>): Int {
 
         onLoopTiles.add(newLocation)
         val directionIndex = ((travellingDirection.ordinal - turning.turn) + 4) % 4
-        val insideLookingDirection = directionMap[directionIndex] ?: error("couldn't find direction with $directionIndex")
+        val insideLookingDirection =
+            directionMap[directionIndex] ?: error("couldn't find direction with $directionIndex")
 
-        val potentialInsideTiles = listOf(newLocation + insideLookingDirection.location, currentLocation + insideLookingDirection.location)
+        val potentialInsideTiles =
+            listOf(newLocation + insideLookingDirection.location, currentLocation + insideLookingDirection.location)
         potentialInsideTiles.filter { !onLoopTiles.contains(it) }.forEach { insideTiles.add(it) }
 
         currentLocation = newLocation
@@ -62,32 +65,34 @@ fun solvePart2(input: List<String>): Int {
     insideTiles.removeIf { onLoopTiles.contains(it) }
     insideTiles.removeIf { location -> grid.getTile(location) == null }
 
-    val finalInsideTiles = expandInnerTiles(onLoopTiles, insideTiles, grid)
-    return finalInsideTiles.size
+    return expandInnerTiles(onLoopTiles, insideTiles, grid)
 }
 
-fun expandInnerTiles(onLoop: Set<Location>, inside: Set<Location>, grid: Grid<Tile>): List<Location> {
-    val exploredTiles = (onLoop + inside).toMutableList()
-    val pendingTiles = inside.toMutableList()
-    val insideTiles = inside.toMutableList()
+fun expandInnerTiles(onLoop: Set<Location>, inside: Set<Location>, grid: Grid<Tile>): Int {
+    val exploredTiles = (onLoop + inside).toSortedSet { x, y ->
+        val first = x.first.compareTo(y.first)
+        if(first == 0) + x.second.compareTo(y.second) else first
+    }
 
+    val pendingTiles = inside.toMutableSet()
+    val innerTiles = inside.toMutableList()
     while(pendingTiles.isNotEmpty()) {
-        val exploringTile = pendingTiles.removeFirst()
+        val exploringTile = pendingTiles.first()
+        pendingTiles.remove(exploringTile)
         Direction.values().forEach { direction ->
             val neighbour = exploringTile + direction.location
             if (exploredTiles.contains(neighbour)
                 || pendingTiles.contains(neighbour)
-                || insideTiles.contains(neighbour)
             ) return@forEach
 
             grid.getTile(neighbour) ?: return@forEach
             pendingTiles.add(neighbour)
-            insideTiles.add(neighbour)
+            innerTiles.add(neighbour)
         }
         exploredTiles.add(exploringTile)
     }
 
-    return insideTiles
+    return innerTiles.toSet().size
 }
 
 fun Grid<Tile>.getTile(location: Location) = this.getOrNull(location.first)?.getOrNull(location.second)

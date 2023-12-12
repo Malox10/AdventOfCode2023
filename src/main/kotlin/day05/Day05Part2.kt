@@ -3,7 +3,7 @@ package day05
 import readResource
 
 fun main() {
-    val input = readResource("Day05.txt")
+    val input = readResource("Day05Johnny.txt")
     val solution = solvePart2(input)
     println(solution)
 }
