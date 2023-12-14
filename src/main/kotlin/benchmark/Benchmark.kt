@@ -14,6 +14,7 @@ import kotlin.math.*
 @OutputTimeUnit(TimeUnit.MICROSECONDS)
 @Measurement(iterations = 1, time = 10, timeUnit = TimeUnit.SECONDS)
 open class TestBenchmark {
+    private var input12: List<String> = readResourceLines("Day12.txt")
     private var input10: List<String> = readResourceLines("Day10.txt")
     private var input7: List<String> = readResourceLines("Day07.txt")
 
@@ -44,5 +45,10 @@ open class TestBenchmark {
     @Benchmark
     open fun day7Part1(): Long {
         return day07.solve(input7)
+    }
+
+    @Benchmark
+    open fun day12Part2(): Int {
+        return day12.solvePart2(input12).toInt()
     }
 }
