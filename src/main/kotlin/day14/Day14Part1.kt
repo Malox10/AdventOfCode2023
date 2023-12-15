@@ -11,14 +11,13 @@ fun main() {
 fun solve(input: List<String>): Int {
     val platform = parse(input)
     do {
-        val changed = platform.movePlatformNorth()
+        val changed = platform.movePlatform()
     } while(changed)
 
     return platform.reversed().mapIndexed { index, row -> row.count { it == State.Rolling } * (index + 1) }.sum()
 }
 
-val north = -1 to 0
-fun Platform.movePlatformNorth(): Boolean {
+fun Platform.movePlatform(direction: Direction = Direction.North): Boolean {
     var madeMoves = false
     for (row in this.indices) {
         for (column in this.first().indices) {
@@ -26,7 +25,7 @@ fun Platform.movePlatformNorth(): Boolean {
             val state = this.getState(location) ?: continue
             if(state != State.Rolling) continue
 
-            val newLocation = location + north
+            val newLocation = location + direction.offset
             val newSpace = this.getState(newLocation)
             if(newSpace != State.Empty) continue
 
