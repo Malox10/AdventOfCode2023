@@ -1,3 +1,5 @@
+@file:Suppress("unused")
+
 package benchmark
 
 import kotlinx.benchmark.Mode
@@ -37,15 +39,15 @@ open class TestBenchmark {
 //        return solvePart2FreezyVersion(input)
 //    }
 
-    @Benchmark
-    open fun day10Part2(): Int {
-        return day10.solvePart2(input10)
-    }
-
-    @Benchmark
-    open fun day7Part1(): Long {
-        return day07.solve(input7)
-    }
+//    @Benchmark
+//    open fun day10Part2(): Int {
+//        return day10.solvePart2(input10)
+//    }
+//
+//    @Benchmark
+//    open fun day7Part1(): Long {
+//        return day07.solve(input7)
+//    }
 
     @Benchmark
     open fun day12Part2(): Int {
