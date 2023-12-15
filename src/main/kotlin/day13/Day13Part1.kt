@@ -24,7 +24,7 @@ fun solve(input: List<String>): Int {
     return axis.sumOf { it.first.multiplier * it.second }
 }
 
-fun Pattern.findRowAxis(): Int? {
+fun Pattern.findRowAxis(oldMirrorIndex: Int? = null): Int? {
     for (mirrorIndex in (1 until this.size)) {
         var isAxis = true
         var distance = 0
@@ -37,7 +37,9 @@ fun Pattern.findRowAxis(): Int? {
             }
             distance++
         }
-        if(isAxis) return mirrorIndex
+        if(isAxis) {
+            if(mirrorIndex != oldMirrorIndex) return mirrorIndex
+        }
     }
 
     return null
