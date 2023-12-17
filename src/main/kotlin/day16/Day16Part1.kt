@@ -3,7 +3,7 @@ package day16
 import readResourceLines
 
 fun main() {
-    val input = readResourceLines("Day16.txt")
+    val input = readResourceLines("Day16T.txt")
     val solution = solve(input)
     println(solution)
 }
