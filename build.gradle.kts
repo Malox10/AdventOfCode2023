@@ -1,7 +1,6 @@
 plugins {
     kotlin("jvm") version "1.8.0"
     id("org.jetbrains.kotlinx.benchmark") version "0.4.4"
-//    id("org.jetbrains.kotlin.plugin.allopen")
 }
 
 group = "com.github.malox10"
@@ -10,11 +9,6 @@ version = "1.0-SNAPSHOT"
 repositories {
     mavenCentral()
 }
-
-//allOpen {
-//    annotation("org.openjdk.jmh.annotations.State")
-//}
-
 
 dependencies {
     testImplementation(kotlin("test"))
