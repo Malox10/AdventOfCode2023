@@ -1,3 +1,5 @@
+@file:Suppress("DuplicatedCode", "unused")
+
 package day17
 
 import readResourceLines
@@ -13,6 +15,7 @@ fun main() {
     })
 }
 
+@Suppress("UNUSED_VARIABLE")
 fun solve(input: List<String>): Int {
     val grid = input.map { line -> line.map { it.digitToInt() } }
 
@@ -47,10 +50,11 @@ fun solve(input: List<String>): Int {
     }.toMutableMap()
 
 
-    val pathfinder = Pathfinder(grid)
+    val pathfinder = PathFinderPart2(grid)
     return pathfinder.aStar(0 to 0).first().heat
 }
 
+@Suppress("unused")
 fun List<List<Int>>.printPath(finishPath: Iterable<NewOptimization.Node>) {
     println()
     for(row in this.indices) {
@@ -67,16 +71,16 @@ class Pathfinder(private val grid: List<List<Int>>) {
     data class Key(val location: Location, val direction: Direction, val sameDirectionMoves: Int)
 
     //    private val factor = 1
-    val openList = PriorityQueue<Node> { a, b ->
+    private val openList = PriorityQueue<Node> { a, b ->
 //        return@PriorityQueue (a.heat / a.location.sum()) compareTo (b.heat / b.location.sum())
 //        return@PriorityQueue (a.heat - a.location.sum() * factor) compareTo (b.heat - b.location.sum() * factor)
         return@PriorityQueue a.heat compareTo b.heat
     }
 
-    val closedList: MutableSet<Key> = mutableSetOf()
+    private val closedList: MutableSet<Key> = mutableSetOf()
 
     fun aStar(start: Location): List<Node> {
-        openList.add(Node(Key(start, Direction.East, 0), 0, null, ))
+        openList.add(Node(Key(start, Direction.East, 0), 0, null))
 
         do {
             val currentNode = openList.remove()
@@ -312,7 +316,6 @@ class NewOptimization(private val grid: List<List<Int>>) {
 //}
 
 fun List<List<Int>>.getHeat(location: Location) = this.getOrNull(location.first)?.getOrNull(location.second)
-data class State(val location: Location, val direction: Direction, val heat: Int, val sameDirectionMoves: Int)
 
 typealias Location = Pair<Int, Int>
 enum class Direction(val offset: Location) {
