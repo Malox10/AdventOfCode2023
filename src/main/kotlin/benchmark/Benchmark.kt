@@ -20,6 +20,7 @@ open class TestBenchmark {
     private var input10: List<String> = readResourceLines("Day10.txt")
     private var input11: List<String> = readResourceLines("Day11.txt")
     private var input12: List<String> = readResourceLines("Day12.txt")
+    private var input16: List<String> = readResourceLines("Day16.txt")
 
     @Setup
     open fun setUp() {
@@ -50,14 +51,19 @@ open class TestBenchmark {
 //        return day07.solve(input7)
 //    }
 
-    @Benchmark
-    open fun day11Part2(): Int {
-        return day11.solvePart2(input11).toInt()
-    }
+//    @Benchmark
+//    open fun day11Part2(): Int {
+//        return day11.solvePart2(input11).toInt()
+//    }
 
 //    @Benchmark
 //    open fun day12Part2(): Int {
 //        day12.cache.clear()
 //        return day12.solvePart2(input12).toInt()
 //    }
+
+    @Benchmark
+    open fun day16Part2(): Int {
+        return day16.solvePart2(input16)
+    }
 }
